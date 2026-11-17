@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biologie Portfolio: Mutationen & Genetik</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        bio: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        },
+                        slate: {
+                            850: '#172033',
+                            900: '#0f172a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom subtle patterns & animations */
+        .dna-bg {
+            background-color: #0f172a;
+            background-image: radial-gradient(rgba(16, 185, 129, 0.15) 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+        .card-hover {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -8px rgba(15, 23, 42, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-bio-200 selection:text-bio-900">
+
+    <!-- Sticky Navigation Header -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200 shadow-sm">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Brand / Logo -->
+                <a href="#top" class="flex items-center gap-2.5 group">
+                    <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-bio-600 to-teal-700 flex items-center justify-center text-white shadow-sm group-hover:scale-105 transition-transform">
+                        <!-- DNA SVG Icon -->
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <span class="font-bold text-slate-900 tracking-tight block leading-none">Bio-Portfolio</span>
+                        <span class="text-[11px] font-medium text-bio-700 tracking-wider uppercase">Genetik & Mutationen</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-1 lg:gap-2 text-sm font-medium">
+                    <a href="#grundlagen" class="px-3 py-2 rounded-lg text-slate-600 hover:text-bio-700 hover:bg-bio-50 transition-colors">1. Grundlagen</a>
+                    <a href="#duplikation" class="px-3 py-2 rounded-lg text-slate-600 hover:text-bio-700 hover:bg-bio-50 transition-colors">2. Duplikation</a>
+                    <a href="#konsequenzen" class="px-3 py-2 rounded-lg text-slate-600 hover:text-bio-700 hover:bg-bio-50 transition-colors">3. Konsequenzen</a>
+                    <a href="#rastermutation" class="px-3 py-2 rounded-lg text-slate-600 hover:text-bio-700 hover:bg-bio-50 transition-colors">4. Leseraster</a>
+                    <a href="#chromosomen" class="px-3 py-2 rounded-lg text-slate-600 hover:text-bio-700 hover:bg-bio-50 transition-colors">5. Chromosomen</a>
+                    <a href="#quiz-section" class="ml-2 px-4 py-2 rounded-xl bg-bio-600 text-white font-semibold hover:bg-bio-700 shadow-sm transition-all flex items-center gap-1.5">
+                        <span>Lern-Quiz</span>
+                        <span class="bg-bio-800/60 text-bio-100 text-xs px-1.5 py-0.5 rounded-md">12</span>
+                    </a>
+                </nav>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" aria-label="Menü öffnen" class="md:hidden p-2 rounded-xl text-slate-600 hover:bg-slate-100 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-slate-200 px-4 pt-2 pb-4 space-y-1">
+            <a href="#grundlagen" class="mobile-link block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-bio-50 hover:text-bio-700">1. Grundlagen & Mutagene</a>
+            <a href="#duplikation" class="mobile-link block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-bio-50 hover:text-bio-700">2. Duplikation & Evolution</a>
+            <a href="#konsequenzen" class="mobile-link block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-bio-50 hover:text-bio-700">3. Konsequenzen</a>
+            <a href="#rastermutation" class="mobile-link block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-bio-50 hover:text-bio-700">4. Rastermutationen & Leseraster</a>
+            <a href="#chromosomen" class="mobile-link block px-3 py-2.5 rounded-xl text-sm font-medium text-slate-700 hover:bg-bio-50 hover:text-bio-700">5. Chromosomenmutationen</a>
+            <a href="#quiz-section" class="mobile-link block px-3 py-2.5 rounded-xl text-sm font-semibold bg-bio-600 text-white text-center mt-2">Zum Lernstands-Quiz (12 Fragen)</a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="top" class="dna-bg text-white py-14 sm:py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto relative z-10">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-bio-900/80 border border-bio-500/30 text-bio-300 text-xs font-semibold uppercase tracking-wider mb-6">
+                <span class="w-2 h-2 rounded-full bg-bio-400 animate-pulse"></span>
+                Biologie LK / GK • Genetik-Übersicht
+            </div>
+            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight max-w-3xl">
+                Mutationen: Ursachen, Mechanismen & Auswirkungen
+            </h1>
+            <p class="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
+                Eine strukturierte Lern- und Veranschaulichungsplattform zu Veränderungen des Erbguts – von molekularen Rastermutationen bis hin zu Chromosomenumbauten und evolutionären Chancen.
+            </p>
+            <div class="mt-8 flex flex-wrap gap-3">
+                <a href="#grundlagen" class="px-5 py-3 rounded-xl bg-bio-600 hover:bg-bio-500 text-white font-semibold text-sm shadow-lg shadow-bio-900/40 transition-all">
+                    Lerninhalte erkunden
+                </a>
+                <a href="#raster-simulator" class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-100 border border-slate-700 font-semibold text-sm transition-all">
+                    Leseraster-Simulator testen
+                </a>
+                <a href="#quiz-section" class="px-5 py-3 rounded-xl bg-white/10 hover:bg-white/20 text-white backdrop-blur-sm font-semibold text-sm transition-all">
+                    Direkt zum Wissenstest →
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Container -->
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-20">
+
+        <!-- ========================================================= -->
+        <!-- 1. GRUNDLAGEN: MUTATIONEN & MUTAGENE                      -->
+        <!-- ========================================================= -->
+        <section id="grundlagen" class="scroll-mt-24">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="px-2.5 py-1 rounded-lg bg-bio-100 text-bio-800 text-xs font-bold uppercase tracking-wider">Kapitel 01</span>
+                <span class="text-sm text-slate-500 font-medium">Begriffsklärung & Auslöser</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Grundlagen: Mutationen & Mutagene</h2>
+
+            <!-- Definition & Eigenschaften Grid -->
+            <div class="mt-6 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Definition Box -->
+                <div class="lg:col-span-5 bg-gradient-to-br from-bio-800 to-slate-900 text-white rounded-2xl p-6 sm:p-7 shadow-md flex flex-col justify-between">
+                    <div>
+                        <div class="text-xs font-mono uppercase tracking-widest text-bio-300 mb-2">Definition</div>
+                        <h3 class="text-2xl font-bold">Mutation</h3>
+                        <p class="text-sm text-bio-200 italic mt-0.5">(lat. <em>mutare</em> = verändern)</p>
+                        <p class="mt-4 text-slate-100 text-base leading-relaxed">
+                            Eine Mutation ist eine <strong>spontane, dauerhafte und zufällige Veränderung des Erbguts</strong>.
+                        </p>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/15 text-xs text-slate-300">
+                        Tritt eine Mutation in Keimzellen auf, wird sie an Nachkommen vererbt; in Körperzellen (somatisch) betrifft sie nur die Tochterzellen.
+                    </div>
+                </div>
+
+                <!-- 3 Eigenschaften -->
+                <div class="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+                    <h3 class="text-lg font-bold text-slate-900 mb-4">Zentrale Eigenschaften von Mutationen</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="w-8 h-8 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center font-bold shrink-0 mt-0.5">1</div>
+                            <div>
+                                <h4 class="font-semibold text-slate-900">Zufällig und ungerichtet</h4>
+                                <p class="text-sm text-slate-600 mt-0.5">Mutationen passieren nicht absichtlich oder zielgerichtet auf einen bestimmten Zweck hin.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="w-8 h-8 rounded-lg bg-bio-100 text-bio-700 flex items-center justify-center font-bold shrink-0 mt-0.5">2</div>
+                            <div>
+                                <h4 class="font-semibold text-slate-900">Dauerhaft</h4>
+                                <p class="text-sm text-slate-600 mt-0.5">Wird ein DNA-Schaden nicht durch zelleigene Reparatursysteme behoben, bleibt die Veränderung dauerhaft bestehen.</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-3.5 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                            <div class="w-8 h-8 rounded-lg bg-sky-100 text-sky-700 flex items-center justify-center font-bold shrink-0 mt-0.5">3</div>
+                            <div>
+                                <h4 class="font-semibold text-slate-900">Spontan</h4>
+                                <p class="text-sm text-slate-600 mt-0.5">Sie entstehen entweder <strong>spontan durch fehlerhafte DNA-Replikation</strong> oder ausgelöst durch <strong>äußere Einflüsse (Mutagene)</strong>.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mutagene Unterabschnitt -->
+            <div class="mt-8 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+                <div class="max-w-3xl">
+                    <h3 class="text-xl font-bold text-slate-900">Mutagene: Äußere Auslöser</h3>
+                    <p class="text-slate-600 text-sm sm:text-base mt-1">
+                        Ein <strong>Mutagen</strong> ist ein von außen wirkender Faktor, der das Erbgut verändert oder beschädigt. Man unterscheidet drei Hauptgruppen:
+                    </p>
+                </div>
+
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Physikalische Mutagene -->
+                    <div class="rounded-2xl p-5 bg-amber-50/70 border border-amber-200/80 card-hover">
+                        <div class="w-10 h-10 rounded-xl bg-amber-500 text-white flex items-center justify-center mb-3 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-base">Physikalische Mutagene</h4>
+                        <p class="text-xs text-amber-800 font-medium mt-0.5 mb-3">Energiereiche Strahlung & Wärme</p>
+                        <ul class="space-y-1.5 text-sm text-slate-700">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>UV-Strahlung</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Röntgenstrahlung</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Radioaktive Strahlung</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-amber-500"></span>Extrem hohe Temperaturen</li>
+                        </ul>
+                    </div>
+
+                    <!-- Chemische Mutagene -->
+                    <div class="rounded-2xl p-5 bg-purple-50/70 border border-purple-200/80 card-hover">
+                        <div class="w-10 h-10 rounded-xl bg-purple-600 text-white flex items-center justify-center mb-3 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-base">Chemische Mutagene</h4>
+                        <p class="text-xs text-purple-800 font-medium mt-0.5 mb-3">Reaktive Substanzen & Gifte</p>
+                        <ul class="space-y-1.5 text-sm text-slate-700">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Salpetrige Säuren</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-purple-500"></span>Teerstoffe (z. B. im Zigarettenrauch)</li>
+                        </ul>
+                    </div>
+
+                    <!-- Biologische Mutagene -->
+                    <div class="rounded-2xl p-5 bg-rose-50/70 border border-rose-200/80 card-hover">
+                        <div class="w-10 h-10 rounded-xl bg-rose-600 text-white flex items-center justify-center mb-3 shadow-sm">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <h4 class="font-bold text-slate-900 text-base">Biologische Mutagene</h4>
+                        <p class="text-xs text-rose-800 font-medium mt-0.5 mb-3">Organismen & Erreger</p>
+                        <ul class="space-y-1.5 text-sm text-slate-700">
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>Lebende Organismen (z. B. bestimmte Bakterien/Pilztoxine)</li>
+                            <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-rose-500"></span>Infektiöse Partikel (Viren, die ihr Erbgut in die Wirts-DNA einbauen)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- 2. DUPLIKATION & EVOLUTIONÄRE BEDEUTUNG                   -->
+        <!-- ========================================================= -->
+        <section id="duplikation" class="scroll-mt-24">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="px-2.5 py-1 rounded-lg bg-bio-100 text-bio-800 text-xs font-bold uppercase tracking-wider">Kapitel 02</span>
+                <span class="text-sm text-slate-500 font-medium">Verdopplung von Erbmaterial</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Duplikation & Evolutionäre Bedeutung</h2>
+
+            <div class="mt-6 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-8">
+                <!-- Entstehung & Unterscheidung -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+                    <div>
+                        <h3 class="text-lg font-bold text-slate-900">Wie entsteht eine Duplikation?</h3>
+                        <p class="mt-2 text-sm sm:text-base text-slate-600 leading-relaxed">
+                            Eine Duplikation ist eine Form der Mutation, bei der – häufig während der <strong>Meiose</strong> – ein <strong>ungleiches Crossing-Over</strong> entsteht. Durch eine falsche Anlagerung homologer Chromosomen während der Paarung besitzt anschließend ein Chromosom einen Abschnitt <strong>doppelt</strong>, während dieser dem anderen Chromosom <strong>fehlt</strong> (Deletion).
+                        </p>
+
+                        <div class="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                            <div class="p-4 rounded-xl bg-teal-50 border border-teal-200">
+                                <span class="text-xs font-bold uppercase tracking-wider text-teal-800">Ebene 1</span>
+                                <h4 class="font-bold text-slate-900 mt-0.5">Genduplikation</h4>
+                                <p class="text-xs sm:text-sm text-slate-600 mt-1">Ein kleiner Teil eines Gens oder ein einzelnes Gen wird verdoppelt.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-200">
+                                <span class="text-xs font-bold uppercase tracking-wider text-indigo-800">Ebene 2</span>
+                                <h4 class="font-bold text-slate-900 mt-0.5">Chromosomenduplikation</h4>
+                                <p class="text-xs sm:text-sm text-slate-600 mt-1">Ein größerer, mikroskopisch sichtbarer Teil eines Chromosoms wird verdoppelt.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SVG Veranschaulichung Ungleiches Crossing-Over -->
+                    <div class="bg-slate-50 rounded-2xl p-5 border border-slate-200">
+                        <div class="text-xs font-semibold text-slate-500 uppercase tracking-wider text-center mb-3">Schema: Ungleiches Crossing-Over in der Meiose</div>
+                        <svg viewBox="0 0 420 190" class="w-full h-auto max-w-md mx-auto">
+                            <!-- Homolog 1 (oben) -->
+                            <text x="10" y="38" font-size="11" font-weight="600" fill="#334155">Chromosom A</text>
+                            <rect x="95" y="24" width="60" height="20" rx="4" fill="#cbd5e1"/>
+                            <rect x="157" y="24" width="65" height="20" rx="4" fill="#10b981"/>
+                            <text x="189" y="38" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">Gen X</text>
+                            <rect x="224" y="24" width="75" height="20" rx="4" fill="#cbd5e1"/>
+
+                            <!-- Homolog 2 (versetzt darunter) -->
+                            <text x="10" y="76" font-size="11" font-weight="600" fill="#334155">Chromosom B</text>
+                            <rect x="135" y="62" width="60" height="20" rx="4" fill="#94a3b8"/>
+                            <rect x="197" y="62" width="65" height="20" rx="4" fill="#059669"/>
+                            <text x="229" y="76" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">Gen X</text>
+                            <rect x="264" y="62" width="75" height="20" rx="4" fill="#94a3b8"/>
+
+                            <!-- Crossing-Over Linie -->
+                            <path d="M 223 44 L 196 62" stroke="#ef4444" stroke-width="2.5" stroke-dasharray="4 2"/>
+                            <text x="315" y="54" font-size="10" font-weight="700" fill="#dc2626">← Falsche Paarung</text>
+
+                            <!-- Trennlinie -->
+                            <line x1="20" y1="102" x2="400" y2="102" stroke="#cbd5e1" stroke-width="1.5"/>
+
+                            <!-- Ergebnis 1: Duplikation -->
+                            <text x="10" y="132" font-size="11" font-weight="700" fill="#047857">Duplikation:</text>
+                            <rect x="95" y="118" width="55" height="20" rx="4" fill="#cbd5e1"/>
+                            <rect x="152" y="118" width="60" height="20" rx="4" fill="#10b981"/>
+                            <text x="182" y="132" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">Gen X</text>
+                            <rect x="214" y="118" width="60" height="20" rx="4" fill="#059669"/>
+                            <text x="244" y="132" font-size="10" font-weight="bold" fill="#ffffff" text-anchor="middle">Gen X</text>
+                            <rect x="276" y="118" width="70" height="20" rx="4" fill="#94a3b8"/>
+
+                            <!-- Ergebnis 2: Deletion -->
+                            <text x="10" y="170" font-size="11" font-weight="700" fill="#be123c">Deletion:</text>
+                            <rect x="95" y="156" width="60" height="20" rx="4" fill="#94a3b8"/>
+                            <rect x="157" y="156" width="75" height="20" rx="4" fill="#cbd5e1"/>
+                            <text x="245" y="170" font-size="10" fill="#be123c" font-weight="600">(Gen X fehlt)</text>
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- 3 Folgen der Duplikation -->
+                <div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-1">Drei mögliche Folgen einer Genduplikation</h3>
+                    <p class="text-sm text-slate-600 mb-4">Die Auswirkungen hängen stark vom jeweils betroffenen Gen ab:</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <!-- Neofunktionalisierung -->
+                        <div class="rounded-2xl p-5 bg-emerald-50/80 border border-emerald-200 flex flex-col justify-between card-hover">
+                            <div>
+                                <span class="inline-block px-2.5 py-0.5 rounded-md bg-emerald-600 text-white text-xs font-bold mb-2">Evolutionäre Chance</span>
+                                <h4 class="font-bold text-slate-900 text-base">Neofunktionalisierung</h4>
+                                <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                                    Eine Genkopie übernimmt weiterhin die lebenswichtige Grundaufgabe. Die zweite Kopie ist „frei“ und kann durch weitere Mutationen <strong>neue Funktionen entwickeln</strong>.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-emerald-200/80 text-xs text-emerald-900 bg-emerald-100/70 p-2.5 rounded-xl">
+                                <strong>Beispiel:</strong> Durch Genduplikation des <strong>L-Zapfens</strong> (Sehpigment) können Menschen als <strong>Trichromaten</strong> Farben differenziert wahrnehmen.
+                            </div>
+                        </div>
+
+                        <!-- Nonfunktionalisierung -->
+                        <div class="rounded-2xl p-5 bg-rose-50/80 border border-rose-200 flex flex-col justify-between card-hover">
+                            <div>
+                                <span class="inline-block px-2.5 py-0.5 rounded-md bg-rose-600 text-white text-xs font-bold mb-2">Gendosis-Problem</span>
+                                <h4 class="font-bold text-slate-900 text-base">Nonfunktionalisierung</h4>
+                                <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                                    Zusätzliche Genkopien führen oft zu einer <strong>höheren Produktion von Proteinen</strong>. Es entsteht ein <strong>Ungleichgewicht in der Gendosis</strong>, oder eine Kopie verliert ihre Funktion.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-rose-200/80 text-xs text-rose-900 bg-rose-100/70 p-2.5 rounded-xl">
+                                <strong>Folge:</strong> Führt häufig zu <strong>Entwicklungsstörungen</strong> oder <strong>genetischen Erkrankungen</strong>.
+                            </div>
+                        </div>
+
+                        <!-- Subfunktionalisierung -->
+                        <div class="rounded-2xl p-5 bg-sky-50/80 border border-sky-200 flex flex-col justify-between card-hover">
+                            <div>
+                                <span class="inline-block px-2.5 py-0.5 rounded-md bg-sky-600 text-white text-xs font-bold mb-2">Arbeitsteilung</span>
+                                <h4 class="font-bold text-slate-900 text-base">Subfunktionalisierung</h4>
+                                <p class="text-sm text-slate-700 mt-2 leading-relaxed">
+                                    Beide Genkopien bleiben aktiv erhalten, spezialisieren sich jedoch und <strong>teilen sich die ursprünglichen Aufgaben</strong> des Einzelgens untereinander auf.
+                                </p>
+                            </div>
+                            <div class="mt-4 pt-3 border-t border-sky-200/80 text-xs text-sky-900 bg-sky-100/70 p-2.5 rounded-xl">
+                                <strong>Effekt:</strong> Beide Kopien werden nun benötigt, um die Gesamtfunktion aufrechtzuerhalten.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- 3. KONSEQUENZEN FÜR GENPRODUKTE & ORGANISMUS              -->
+        <!-- ========================================================= -->
+        <section id="konsequenzen" class="scroll-mt-24">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="px-2.5 py-1 rounded-lg bg-bio-100 text-bio-800 text-xs font-bold uppercase tracking-wider">Kapitel 03</span>
+                <span class="text-sm text-slate-500 font-medium">Von der molekularen Ebene zum Phänotyp</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Konsequenzen für Genprodukte & Organismus</h2>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Konsequenzen für Genprodukte -->
+                <div class="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-sm">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-xl bg-slate-900 text-bio-400 flex items-center justify-center font-mono font-bold text-sm">DNA→P</div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Konsequenzen für die Genprodukte</h3>
+                            <p class="text-xs text-slate-500">Auswirkungen auf das gebildete Protein</p>
+                        </div>
+                    </div>
+                    <ul class="space-y-3 text-sm text-slate-700">
+                        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+                            <span class="text-bio-600 font-bold mt-0.5">✓</span>
+                            <span><strong>Funktion bleibt unverändert:</strong> z. B. bei stummen Mutationen (gleiche Aminosäure durch degenerierten genetischen Code).</span>
+                        </li>
+                        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+                            <span class="text-amber-600 font-bold mt-0.5">⇄</span>
+                            <span><strong>Form und Funktion ändern sich:</strong> Einbau einer anderen Aminosäure verändert die räumliche Struktur (Tertiärstruktur) des Proteins.</span>
+                        </li>
+                        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+                            <span class="text-rose-600 font-bold mt-0.5">■</span>
+                            <span><strong>Frühzeitiges Ende der Herstellung:</strong> Ein vorzeitiges Stoppcodon bricht die Translation ab – das Genprodukt ist meist <strong>funktionsuntüchtig</strong>.</span>
+                        </li>
+                        <li class="p-3 rounded-xl bg-slate-50 border border-slate-100 flex items-start gap-3">
+                            <span class="text-rose-600 font-bold mt-0.5">↯</span>
+                            <span><strong>Verschiebung der Aminosäurekette:</strong> Ab einer Rasterverschiebung werden falsche Aminosäuren eingebaut → <strong>Funktionsuntüchtigkeit des Genprodukts</strong>.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Konsequenzen für den Organismus -->
+                <div class="bg-white rounded-2xl p-6 sm:p-7 border border-slate-200 shadow-sm flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-bio-600 text-white flex items-center justify-center">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900">Konsequenzen für den Organismus</h3>
+                                <p class="text-xs text-slate-500">Bewertung im Kontext der Umwelt</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3.5 text-sm">
+                            <div class="p-3.5 rounded-xl bg-slate-50 border border-slate-200/80">
+                                <div class="font-bold text-slate-800">1. Keine Konsequenzen (neutral)</div>
+                                <p class="text-slate-600 mt-1">Die Mutation wirkt sich weder positiv noch negativ auf Überleben oder Fortpflanzung aus.</p>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-rose-50/70 border border-rose-200">
+                                <div class="font-bold text-rose-900">2. Schädliche Konsequenzen</div>
+                                <p class="text-rose-800 mt-1">Führt zu Krankheiten oder Fehlfunktionen im Stoffwechsel.<br><strong>Beispiel: Albinismus</strong> (fehlende Melaninbildung durch defektes Enzym).</p>
+                            </div>
+
+                            <div class="p-3.5 rounded-xl bg-emerald-50/70 border border-emerald-200">
+                                <div class="font-bold text-emerald-900">3. Vorteilhafte Konsequenzen</div>
+                                <p class="text-emerald-800 mt-1">Kann dem Organismus einen Selektions- bzw. Überlebensvorteil verschaffen.<br><strong>Beispiel: Laktosetoleranz</strong> (Milchzucker kann auch im Erwachsenenalter verdaut werden).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- 4. RASTERMUTATIONEN & INTERAKTIVER SIMULATOR              -->
+        <!-- ========================================================= -->
+        <section id="rastermutation" class="scroll-mt-24">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="px-2.5 py-1 rounded-lg bg-bio-100 text-bio-800 text-xs font-bold uppercase tracking-wider">Kapitel 04</span>
+                <span class="text-sm text-slate-500 font-medium">Translation, Codons & Leserahmen</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Rastermutationen: Das Leseraster</h2>
+
+            <!-- Grundlage Leseraster -->
+            <div class="mt-6 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+                    <div class="lg:col-span-7 space-y-3 text-sm sm:text-base text-slate-700 leading-relaxed">
+                        <h3 class="text-lg font-bold text-slate-900">Grundlage: Wie funktioniert das Leseraster?</h3>
+                        <p>
+                            Bei der Proteinbiosynthese wird die genetische Information der <strong>mRNA am Ribosom in Proteine übersetzt (Translation)</strong>. Da es nur <strong>vier verschiedene RNA-Basen (A, U, G, C)</strong>, aber <strong>20 proteinogene Aminosäuren</strong> gibt, codieren immer <strong>drei aufeinanderfolgende Basen (ein Triplett bzw. Codon)</strong> für eine bestimmte Aminosäure.
+                        </p>
+                        <p>
+                            Dieses fest vorgegebene Einteilungsschema bezeichnet man als <strong>Leseraster</strong>. Es wird durch das <strong>Startcodon AUG</strong> exakt festgelegt und anschließend <strong>lückenlos und ohne Überlappung in 3er-Schritten</strong> abgelesen. Verschiebt sich dieser Leserahmen durch eine Mutation, werden alle nachfolgenden Basen falsch gruppiert – es entstehen völlig andere Aminosäuren oder ein vorzeitiges Stoppsignal.
+                        </p>
+                    </div>
+
+                    <div class="lg:col-span-5 bg-slate-900 text-slate-100 rounded-2xl p-5 flex flex-col justify-center">
+                        <div class="text-xs font-mono uppercase tracking-wider text-bio-400 mb-3">Die zwei Ursachen der Verschiebung</div>
+                        <div class="space-y-3">
+                            <div class="p-3.5 rounded-xl bg-slate-800 border border-slate-700">
+                                <div class="font-bold text-bio-300 flex items-center gap-2">
+                                    <span class="px-2 py-0.5 rounded bg-bio-500/20 text-bio-300 font-mono text-xs">+ Insertion</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-1">Zusätzliche Basen werden in die DNA-Sequenz eingebaut (z. B. Microinsertion).</p>
+                            </div>
+                            <div class="p-3.5 rounded-xl bg-slate-800 border border-slate-700">
+                                <div class="font-bold text-rose-300 flex items-center gap-2">
+                                    <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono text-xs">− Deletion</span>
+                                </div>
+                                <p class="text-xs sm:text-sm text-slate-300 mt-1">Basen werden aus der DNA-Sequenz entfernt (z. B. Microdeletion).</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Gegenüberstellung: out-of-frame vs. in-frame -->
+                <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- out-of-frame -->
+                    <div class="rounded-2xl p-6 bg-rose-50/60 border border-rose-200">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-bold text-rose-950">out-of-frame-Mutation</h3>
+                            <span class="px-2.5 py-1 rounded-lg bg-rose-600 text-white text-xs font-mono font-bold">nicht durch 3 teilbar</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Entsteht, wenn durch Insertion oder Deletion eine Anzahl an Basen hinzugefügt oder entfernt wird, die <strong>nicht durch 3 teilbar</strong> ist (z. B. <strong>1 oder 2 Basen</strong>).
+                        </p>
+                        <ul class="mt-3 space-y-1.5 text-sm text-slate-700">
+                            <li>• Ab der Mutationsstelle verschiebt sich das <strong>gesamte Leseraster</strong>.</li>
+                            <li>• Alle nachfolgenden Basen werden zu neuen, falschen Tripletts gruppiert.</li>
+                            <li>• Führt zu einer <strong>komplett veränderten Aminosäuresequenz</strong> und oft zu einem <strong>vorzeitigen Stoppcodon</strong>.</li>
+                            <li>• Das gebildete Protein ist meist <strong>stark verkürzt und funktionslos</strong>.</li>
+                        </ul>
+                    </div>
+
+                    <!-- in-frame -->
+                    <div class="rounded-2xl p-6 bg-amber-50/60 border border-amber-200">
+                        <div class="flex items-center justify-between mb-2">
+                            <h3 class="text-lg font-bold text-amber-950">in-frame-Mutation</h3>
+                            <span class="px-2.5 py-1 rounded-lg bg-amber-600 text-white text-xs font-mono font-bold">durch 3 teilbar</span>
+                        </div>
+                        <p class="text-sm text-slate-700 leading-relaxed">
+                            Liegt vor, wenn die Anzahl der eingefügten oder gelöschten Basen <strong>durch 3 teilbar</strong> ist (z. B. <strong>3 oder 6 Basen = ganze Tripletts</strong>).
+                        </p>
+                        <ul class="mt-3 space-y-1.5 text-sm text-slate-700">
+                            <li>• Es werden vollständige Codons hinzugefügt oder entfernt.</li>
+                            <li>• Das ursprüngliche <strong>Leseraster vor und nach der Mutation bleibt erhalten</strong>.</li>
+                            <li>• Dem Protein fehlt lediglich eine einzelne Aminosäure oder es kommt eine hinzu, während der Rest unverändert bleibt.</li>
+                            <li>• Auswirkungen sind meist <strong>deutlich milder</strong> als bei einer Rasterverschiebung.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- INTERAKTIVER LESERASTER-SIMULATOR -->
+                <div id="raster-simulator" class="mt-8 rounded-2xl bg-slate-900 text-white p-5 sm:p-7 border border-slate-700 shadow-lg scroll-mt-24">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-5 border-b border-slate-800">
+                        <div>
+                            <span class="text-xs font-mono uppercase tracking-wider text-bio-400">Interaktives Labor</span>
+                            <h3 class="text-xl font-bold mt-0.5">mRNA-Leseraster Live-Simulator</h3>
+                            <p class="text-xs sm:text-sm text-slate-400 mt-1">Teste selbst den Unterschied zwischen <strong>out-of-frame</strong> (1 Base) und <strong>in-frame</strong> (3 Basen) nach dem Startcodon AUG!</p>
+                        </div>
+                        <div id="sim-badge" class="self-start sm:self-center px-3 py-1.5 rounded-xl bg-bio-500/20 border border-bio-500/40 text-bio-300 text-xs font-mono font-bold">
+                            Status: Original (Wildtyp)
+                        </div>
+                    </div>
+
+                    <!-- Steuerungs-Buttons -->
+                    <div class="mt-5 flex flex-wrap gap-2.5">
+                        <button onclick="setSimulation('wildtype')" id="btn-sim-wildtype" class="sim-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-bio-600 text-white shadow-sm transition-all">
+                            Original (Wildtyp)
+                        </button>
+                        <button onclick="setSimulation('out-ins')" id="btn-sim-out-ins" class="sim-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
+                            +1 Base Insertion (out-of-frame)
+                        </button>
+                        <button onclick="setSimulation('out-del')" id="btn-sim-out-del" class="sim-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
+                            −1 Base Deletion (out-of-frame)
+                        </button>
+                        <button onclick="setSimulation('in-ins')" id="btn-sim-in-ins" class="sim-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
+                            +3 Basen Insertion (in-frame)
+                        </button>
+                        <button onclick="setSimulation('in-del')" id="btn-sim-in-del" class="sim-btn px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-all">
+                            −3 Basen Deletion (in-frame)
+                        </button>
+                    </div>
+
+                    <!-- Visualisierungs-Ausgabe -->
+                    <div class="mt-6 bg-slate-950/70 rounded-xl p-4 sm:p-5 border border-slate-800 overflow-x-auto">
+                        <div class="text-xs font-mono text-slate-400 mb-2">mRNA-Basensequenz (Ablesung in 3er-Tripletts ab Startcodon AUG):</div>
+                        <div id="sim-codons" class="flex items-center gap-2.5 min-w-max pb-2">
+                            <!-- Wird per JS befüllt -->
+                        </div>
+
+                        <div class="mt-4 pt-4 border-t border-slate-800">
+                            <div class="text-xs font-mono text-slate-400 mb-2">Übersetzte Aminosäurekette (Translation am Ribosom):</div>
+                            <div id="sim-amino" class="flex items-center gap-2 min-w-max">
+                                <!-- Wird per JS befüllt -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Erklärungstext zum gewählten Modus -->
+                    <p id="sim-explanation" class="mt-4 text-xs sm:text-sm text-slate-300 bg-slate-800/70 p-3.5 rounded-xl border border-slate-700/80">
+                        <!-- Wird per JS befüllt -->
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- 5. CHROMOSOMENMUTATIONEN (SCHEMATA)                       -->
+        <!-- ========================================================= -->
+        <section id="chromosomen" class="scroll-mt-24">
+            <div class="flex items-center gap-3 mb-2">
+                <span class="px-2.5 py-1 rounded-lg bg-bio-100 text-bio-800 text-xs font-bold uppercase tracking-wider">Kapitel 05</span>
+                <span class="text-sm text-slate-500 font-medium">Strukturelle Umbauten</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl font-bold text-slate-900">Schemata der Chromosomenmutationen</h2>
+            <p class="text-slate-600 mt-1 text-sm sm:text-base">
+                Chromosomenmutationen verändern die Struktur eines oder mehrerer Chromosomen. Man unterscheidet Veränderungen innerhalb eines Chromosoms und Austauschprozesse zwischen nicht-homologen Chromosomen.
+            </p>
+
+            <!-- Gruppe A: Ein Chromosom betroffen -->
+            <div class="mt-6">
+                <h3 class="text-base font-bold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-bio-600"></span>
+                    A. Mutationen, die ein Chromosom betreffen
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <!-- Deletion -->
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm card-hover">
+                        <h4 class="font-bold text-slate-900 text-lg">1. Deletion</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 mt-1 mb-4">Ein Chromosomenabschnitt bricht heraus und geht dauerhaft verloren – das Chromosom wird kürzer.</p>
+                        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                            <svg viewBox="0 0 220 130" class="w-full h-auto">
+                                <!-- Original -->
+                                <rect x="45" y="10" width="22" height="35" rx="8" fill="#94a3b8"/>
+                                <circle cx="56" cy="48" r="5" fill="#1e293b"/>
+                                <rect x="45" y="56" width="22" height="26" rx="4" fill="#ef4444" opacity="0.85"/>
+                                <text x="56" y="73" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+                                <rect x="45" y="84" width="22" height="36" rx="8" fill="#94a3b8"/>
+                                <!-- Durchgestrichen -->
+                                <line x1="40" y1="54" x2="72" y2="84" stroke="#991b1b" stroke-width="2.5"/>
+                                <line x1="72" y1="54" x2="40" y2="84" stroke="#991b1b" stroke-width="2.5"/>
+                                <!-- Pfeil -->
+                                <path d="M 90 65 L 125 65" stroke="#475569" stroke-width="2" marker-end="url(#arrow)"/>
+                                <!-- Ergebnis -->
+                                <rect x="145" y="22" width="22" height="35" rx="8" fill="#94a3b8"/>
+                                <circle cx="156" cy="60" r="5" fill="#1e293b"/>
+                                <rect x="145" y="68" width="22" height="36" rx="8" fill="#94a3b8"/>
+                                <text x="156" y="118" font-size="10" font-weight="600" fill="#dc2626" text-anchor="middle">Abschnitt fehlt</text>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Duplikation -->
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm card-hover">
+                        <h4 class="font-bold text-slate-900 text-lg">2. Duplikation</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 mt-1 mb-4">Ein Abschnitt eines Chromosoms wird verdoppelt und zusätzlich eingebaut – das Chromosom wird länger.</p>
+                        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                            <svg viewBox="0 0 220 130" class="w-full h-auto">
+                                <!-- Original -->
+                                <rect x="45" y="14" width="22" height="32" rx="8" fill="#94a3b8"/>
+                                <circle cx="56" cy="49" r="5" fill="#1e293b"/>
+                                <rect x="45" y="57" width="22" height="24" rx="4" fill="#3b82f6"/>
+                                <text x="56" y="73" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+                                <rect x="45" y="83" width="22" height="32" rx="8" fill="#94a3b8"/>
+                                <!-- Pfeil -->
+                                <path d="M 90 65 L 125 65" stroke="#475569" stroke-width="2"/>
+                                <!-- Ergebnis -->
+                                <rect x="145" y="5" width="22" height="28" rx="8" fill="#94a3b8"/>
+                                <circle cx="156" cy="36" r="5" fill="#1e293b"/>
+                                <rect x="145" y="44" width="22" height="22" rx="4" fill="#3b82f6"/>
+                                <text x="156" y="59" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+                                <rect x="145" y="68" width="22" height="22" rx="4" fill="#2563eb"/>
+                                <text x="156" y="83" font-size="10" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+                                <rect x="145" y="92" width="22" height="28" rx="8" fill="#94a3b8"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Inversion -->
+                    <div class="bg-white rounded-2xl p-5 border border-slate-200 shadow-sm card-hover">
+                        <h4 class="font-bold text-slate-900 text-lg">3. Inversion</h4>
+                        <p class="text-xs sm:text-sm text-slate-600 mt-1 mb-4">Ein Abschnitt bricht heraus, dreht sich um 180° und wird in umgekehrter Orientierung wieder eingebaut.</p>
+                        <div class="bg-slate-50 rounded-xl p-3 border border-slate-100">
+                            <svg viewBox="0 0 220 130" class="w-full h-auto">
+                                <!-- Original -->
+                                <rect x="45" y="10" width="22" height="30" rx="8" fill="#94a3b8"/>
+                                <circle cx="56" cy="43" r="5" fill="#1e293b"/>
+                                <rect x="45" y="51" width="22" height="17" rx="3" fill="#10b981"/>
+                                <text x="56" y="63" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+                                <rect x="45" y="70" width="22" height="17" rx="3" fill="#0d9488"/>
+                                <text x="56" y="82" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">C</text>
+                                <rect x="45" y="89" width="22" height="30" rx="8" fill="#94a3b8"/>
+                                <!-- Dreh-Pfeile -->
+                                <path d="M 82 58 C 110 58, 110 80, 132 80" fill="none" stroke="#059669" stroke-width="2"/>
+                                <path d="M 82 80 C 110 80, 110 58, 132 58" fill="none" stroke="#0d9488" stroke-width="2"/>
+                                <!-- Ergebnis -->
+                                <rect x="145" y="10" width="22" height="30" rx="8" fill="#94a3b8"/>
+                                <circle cx="156" cy="43" r="5" fill="#1e293b"/>
+                                <rect x="145" y="51" width="22" height="17" rx="3" fill="#0d9488"/>
+                                <text x="156" y="63" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">C</text>
+                                <rect x="145" y="70" width="22" height="17" rx="3" fill="#10b981"/>
+                                <text x="156" y="82" font-size="9" font-weight="bold" fill="#fff" text-anchor="middle">B</text>
+                                <rect x="145" y="89" width="22" height="30" rx="8" fill="#94a3b8"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gruppe B: Zwischen nicht-homologen Chromosomen -->
+            <div class="mt-8">
+                <h3 class="text-base font-bold text-slate-800 uppercase tracking-wider mb-3 flex items-center gap-2">
+                    <span class="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
+                    B. Mutationen zwischen nicht-homologen Chromosomen
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                    <!-- Insertion (chromosomal) -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm card-hover">
+                        <h4 class="font-bold text-slate-900 text-lg">4. Insertion (zwischen Chromosomen)</h4>
+                        <p class="text-sm text-slate-600 mt-1 mb-4">
+                            Ein Abschnitt bricht aus einem Chromosom (z. B. <strong>Chromosom 4</strong>) heraus und wird in ein anderes, nicht-homologes Chromosom (z. B. <strong>Chromosom 20</strong>) eingefügt.
+                        </p>
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                            <svg viewBox="0 0 320 125" class="w-full h-auto">
+                                <!-- Vorher -->
+                                <text x="32" y="14" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">Chr. 4</text>
+                                <rect x="22" y="20" width="20" height="30" rx="6" fill="#6366f1"/>
+                                <rect x="22" y="52" width="20" height="22" rx="4" fill="#f59e0b"/>
+                                <rect x="22" y="76" width="20" height="35" rx="6" fill="#6366f1"/>
+
+                                <text x="82" y="14" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">Chr. 20</text>
+                                <rect x="72" y="30" width="20" height="35" rx="6" fill="#10b981"/>
+                                <rect x="72" y="67" width="20" height="35" rx="6" fill="#10b981"/>
+
+                                <!-- Pfeil -->
+                                <path d="M 115 62 L 165 62" stroke="#475569" stroke-width="2.5"/>
+                                <polygon points="165,57 175,62 165,67" fill="#475569"/>
+                                <text x="143" y="52" font-size="9" font-weight="700" fill="#d97706" text-anchor="middle">Einbau</text>
+
+                                <!-- Nachher -->
+                                <text x="210" y="14" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">Chr. 4 (kürzer)</text>
+                                <rect x="200" y="28" width="20" height="30" rx="6" fill="#6366f1"/>
+                                <rect x="200" y="60" width="20" height="35" rx="6" fill="#6366f1"/>
+
+                                <text x="275" y="14" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">Chr. 20 (länger)</text>
+                                <rect x="265" y="20" width="20" height="35" rx="6" fill="#10b981"/>
+                                <rect x="265" y="57" width="20" height="22" rx="4" fill="#f59e0b"/>
+                                <rect x="265" y="81" width="20" height="35" rx="6" fill="#10b981"/>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- Translokation -->
+                    <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm card-hover">
+                        <h4 class="font-bold text-slate-900 text-lg">5. Translokation (reziproker Austausch)</h4>
+                        <p class="text-sm text-slate-600 mt-1 mb-4">
+                            Zwei nicht-homologe Chromosomen (z. B. <strong>Chromosom 20</strong> und <strong>Chromosom 4</strong>) tauschen gegenseitig Chromosomenabschnitte miteinander aus.
+                        </p>
+                        <div class="bg-slate-50 rounded-xl p-4 border border-slate-100">
+                            <svg viewBox="0 0 320 125" class="w-full h-auto">
+                                <!-- Vorher -->
+                                <text x="32" y="14" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">Chr. 20</text>
+                                <rect x="22" y="24" width="20" height="45" rx="6" fill="#10b981"/>
+                                <rect x="22" y="71" width="20" height="32" rx="6" fill="#34d399"/>
+
+                                <text x="82" y="14" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">Chr. 4</text>
+                                <rect x="72" y="20" width="20" height="52" rx="6" fill="#6366f1"/>
+                                <rect x="72" y="74" width="20" height="34" rx="6" fill="#818cf8"/>
+
+                                <!-- Pfeil -->
+                                <path d="M 115 62 L 165 62" stroke="#475569" stroke-width="2.5"/>
+                                <polygon points="165,57 175,62 165,67" fill="#475569"/>
+                                <text x="143" y="52" font-size="9" font-weight="700" fill="#4f46e5" text-anchor="middle">Austausch</text>
+
+                                <!-- Nachher -->
+                                <text x="210" y="14" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">Veränd. Chr. 20</text>
+                                <rect x="200" y="24" width="20" height="45" rx="6" fill="#10b981"/>
+                                <rect x="200" y="71" width="20" height="34" rx="6" fill="#818cf8"/>
+
+                                <text x="275" y="14" font-size="10" font-weight="bold" fill="#475569" text-anchor="middle">Veränd. Chr. 4</text>
+                                <rect x="265" y="20" width="20" height="52" rx="6" fill="#6366f1"/>
+                                <rect x="265" y="74" width="20" height="32" rx="6" fill="#34d399"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========================================================= -->
+        <!-- 6. INTERAKTIVES LERNSTANDS-QUIZ (12 FRAGEN + AUSWERTUNG)  -->
+        <!-- ========================================================= -->
+        <section id="quiz-section" class="scroll-mt-24 pt-4">
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-lg overflow-hidden">
+                <!-- Quiz Header -->
+                <div class="bg-gradient-to-r from-slate-900 via-slate-850 to-bio-900 text-white p-6 sm:p-8">
+                    <div class="flex flex-wrap items-center justify-between gap-4">
+                        <div>
+                            <span class="inline-block px-3 py-1 rounded-full bg-bio-500/20 border border-bio-400/30 text-bio-300 text-xs font-bold uppercase tracking-wider mb-2">
+                                Lernstandskontrolle
+                            </span>
+                            <h2 class="text-2xl sm:text-3xl font-bold">Abschluss-Quiz: Mutationen (12 Fragen)</h2>
+                            <p class="text-slate-300 text-sm sm:text-base mt-1">
+                                Beantworte alle 12 Fragen zu deinen Unterrichtsnotizen. Am Ende erhältst du eine vollständige Auswertung inklusive detaillierter Erklärungen zu allen falsch beantworteten Fragen.
+                            </p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-2xl px-4 py-3 text-center border border-white/10">
+                            <div class="text-xs text-slate-300 uppercase tracking-wider">Beantwortet</div>
+                            <div id="quiz-progress-text" class="text-xl font-extrabold font-mono text-bio-300 mt-0.5">0 / 12</div>
+                        </div>
+                    </div>
+                    <!-- Progress Bar -->
+                    <div class="mt-5 w-full h-2 bg-slate-800 rounded-full overflow-hidden">
+                        <div id="quiz-progress-bar" class="h-full bg-bio-500 transition-all duration-300" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <!-- Quiz Body -->
+                <div class="p-6 sm:p-8">
+                    <!-- Container für die 12 Fragen -->
+                    <div id="quiz-questions-container" class="space-y-8">
+                        <!-- Fragen werden dynamisch per JavaScript gerendert -->
+                    </div>
+
+                    <!-- Warnhinweis falls nicht alle Fragen beantwortet wurden -->
+                    <div id="quiz-warning" class="hidden mt-6 p-4 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 text-sm font-medium flex items-center gap-3">
+                        <svg class="w-5 h-5 text-amber-600 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                        <span id="quiz-warning-text">Bitte beantworte zuerst alle 12 Fragen, bevor du das Quiz auswertest.</span>
+                    </div>
+
+                    <!-- Auswerten Button -->
+                    <div id="quiz-submit-area" class="mt-8 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+                        <p class="text-xs sm:text-sm text-slate-500">
+                            Tipp: Du kannst deine Auswahl jederzeit ändern, bis du auf „Quiz auswerten“ klickst.
+                        </p>
+                        <button onclick="evaluateQuiz()" class="w-full sm:w-auto px-7 py-3.5 rounded-xl bg-bio-600 hover:bg-bio-700 text-white font-bold text-base shadow-md hover:shadow-lg transition-all cursor-pointer">
+                            Quiz auswerten & Fehler erklären
+                        </button>
+                    </div>
+
+                    <!-- Auswertungs-Container (wird nach Klick angezeigt) -->
+                    <div id="quiz-results-container" class="hidden mt-8 space-y-8">
+                        <!-- Zusammenfassung Karte -->
+                        <div id="quiz-score-card" class="rounded-2xl p-6 sm:p-8 border-2">
+                            <!-- Wird per JS befüllt -->
+                        </div>
+
+                        <!-- Detaillierte Auswertung (Fokus auf falsche Antworten + alle Fragen) -->
+                        <div id="quiz-detailed-review" class="space-y-5">
+                            <!-- Wird per JS befüllt -->
+                        </div>
+
+                        <!-- Neustart Button -->
+                        <div class="pt-4 flex justify-center">
+                            <button onclick="resetQuiz()" class="px-6 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-semibold text-sm shadow transition-all cursor-pointer">
+                                ↻ Quiz neu starten
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-8 px-4 mt-16 border-t border-slate-800">
+        <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs sm:text-sm">
+            <div>
+                <span class="text-white font-semibold">Biologie-Portfolio: Genetik & Mutationen</span> • Erstellt zur Lern- und Unterrichtsveranschaulichung
+            </div>
+            <div class="text-slate-500">
+                Inhalte: Mutationen, Mutagene, Duplikation, Leseraster & Chromosomenmutationen
+            </div>
+        </div>
+    </footer>
+
+    <!-- ========================================================= -->
+    <!-- JAVASCRIPT: SIMULATION & 12-FRAGEN-QUIZ                   -->
+    <!-- ========================================================= -->
+    <script>
+        // --- 1. Mobile Navigation Toggle ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        document.querySelectorAll('.mobile-link').forEach(link => {
+            link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+        });
+
+        // --- 2. Interaktiver mRNA-Leseraster-Simulator ---
+        const simData = {
+            wildtype: {
+                badge: 'Status: Original (Wildtyp)',
+                badgeClass: 'bg-bio-500/20 border-bio-500/40 text-bio-300',
+                codons: [
+                    { bases: 'AUG', type: 'start', aa: 'Met (Start)' },
+                    { bases: 'GUU', type: 'normal', aa: 'Val' },
+                    { bases: 'GCU', type: 'normal', aa: 'Ala' },
+                    { bases: 'UAC', type: 'normal', aa: 'Tyr' },
+                    { bases: 'UAA', type: 'stop', aa: 'STOPP' }
+                ],
+                explanation: 'Das Startcodon AUG legt das Leseraster fest. Anschließend wird lückenlos in 3er-Schritten abgelesen, bis am regulären Stoppcodon UAA ein funktionsfähiges Protein fertiggestellt ist.'
+            },
+            'out-ins': {
+                badge: 'out-of-frame (+1 Base Insertion)',
+                badgeClass: 'bg-rose-500/20 border-rose-500/40 text-rose-300',
+                codons: [
+                    { bases: 'AUG', type: 'start', aa: 'Met (Start)' },
+                    { bases: 'G<span class="text-rose-400 underline font-extrabold">C</span>U', type: 'mutated', aa: 'Ala (falsch!)' },
+                    { bases: 'UGC', type: 'mutated', aa: 'Cys (falsch!)' },
+                    { bases: 'UUA', type: 'mutated', aa: 'Leu (falsch!)' },
+                    { bases: 'CUA', type: 'mutated', aa: 'Leu (Raster verschoben!)' }
+                ],
+                explanation: 'Durch das Einfügen nur einer zusätzlichen Base (C) – nicht durch 3 teilbar – verschiebt sich das gesamte Leseraster ab der Mutationsstelle. Alle nachfolgenden Tripletts sind falsch und das ursprüngliche Stoppcodon UAA wird überlesen!'
+            },
+            'out-del': {
+                badge: 'out-of-frame (−1 Base Deletion)',
+                badgeClass: 'bg-rose-500/20 border-rose-500/40 text-rose-300',
+                codons: [
+                    { bases: 'AUG', type: 'start', aa: 'Met (Start)' },
+                    { bases: 'GUG', type: 'mutated', aa: 'Val (zufällig gleich)' },
+                    { bases: 'CUU', type: 'mutated', aa: 'Leu (falsch!)' },
+                    { bases: 'ACU', type: 'mutated', aa: 'Thr (falsch!)' },
+                    { bases: 'AA...', type: 'mutated', aa: 'Unvollständig / Stopp' }
+                ],
+                explanation: 'Eine Base (U) wurde entfernt. Da 1 nicht durch 3 teilbar ist, rutschen alle folgenden Basen um eine Position nach links. Ab dieser Stelle entsteht eine komplett veränderte Aminosäuresequenz.'
+            },
+            'in-ins': {
+                badge: 'in-frame (+3 Basen Insertion)',
+                badgeClass: 'bg-amber-500/20 border-amber-500/40 text-amber-300',
+                codons: [
+                    { bases: 'AUG', type: 'start', aa: 'Met (Start)' },
+                    { bases: 'GUU', type: 'normal', aa: 'Val' },
+                    { bases: 'GGG', type: 'inserted', aa: '+ Gly (neu)' },
+                    { bases: 'GCU', type: 'normal', aa: 'Ala (erhalten)' },
+                    { bases: 'UAC', type: 'normal', aa: 'Tyr (erhalten)' },
+                    { bases: 'UAA', type: 'stop', aa: 'STOPP' }
+                ],
+                explanation: 'Es wurden 3 Basen (GGG = ein vollständiges Triplett, durch 3 teilbar) eingefügt. Das Leseraster vor und nach der Mutation bleibt exakt erhalten! Es kommt lediglich eine einzelne Aminosäure (Gly) hinzu – die Auswirkungen sind meist deutlich milder.'
+            },
+            'in-del': {
+                badge: 'in-frame (−3 Basen Deletion)',
+                badgeClass: 'bg-amber-500/20 border-amber-500/40 text-amber-300',
+                codons: [
+                    { bases: 'AUG', type: 'start', aa: 'Met (Start)' },
+                    { bases: 'GUU', type: 'normal', aa: 'Val' },
+                    { bases: 'UAC', type: 'normal', aa: 'Tyr (erhalten)' },
+                    { bases: 'UAA', type: 'stop', aa: 'STOPP' }
+                ],
+                explanation: 'Das komplette Triplett GCU (3 Basen = durch 3 teilbar) wurde gelöscht. Dem Protein fehlt nur die eine Aminosäure Alanin (Ala), während der restliche Leserahmen unverändert bleibt.'
+            }
+        };
+
+        function setSimulation(mode) {
+            const data = simData[mode];
+            const badgeEl = document.getElementById('sim-badge');
+            badgeEl.textContent = data.badge;
+            badgeEl.className = `self-start sm:self-center px-3 py-1.5 rounded-xl border text-xs font-mono font-bold ${data.badgeClass}`;
+
+            // Update active button styling
+            document.querySelectorAll('.sim-btn').forEach(btn => {
+                btn.classList.remove('bg-bio-600', 'text-white');
+                btn.classList.add('bg-slate-800', 'text-slate-200', 'border', 'border-slate-700');
+            });
+            const activeBtn = document.getElementById(`btn-sim-${mode}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-slate-800', 'text-slate-200', 'border', 'border-slate-700');
+                activeBtn.classList.add('bg-bio-600', 'text-white');
+            }
+
+            // Render Codons & Amino Acids
+            const codonsEl = document.getElementById('sim-codons');
+            const aminoEl = document.getElementById('sim-amino');
+            codonsEl.innerHTML = '';
+            aminoEl.innerHTML = '';
+
+            data.codons.forEach((item, idx) => {
+                let boxStyle = 'bg-slate-800 border-slate-600 text-slate-100';
+                let aaStyle = 'bg-slate-800 text-slate-200 border-slate-700';
+
+                if (item.type === 'start') {
+                    boxStyle = 'bg-bio-900/80 border-bio-500 text-bio-300';
+                    aaStyle = 'bg-bio-900/60 text-bio-300 border-bio-700';
+                } else if (item.type === 'stop') {
+                    boxStyle = 'bg-slate-800 border-rose-500/70 text-rose-300';
+                    aaStyle = 'bg-rose-950 text-rose-300 border-rose-800';
+                } else if (item.type === 'mutated') {
+                    boxStyle = 'bg-rose-950/90 border-rose-500 text-rose-200';
+                    aaStyle = 'bg-rose-900/60 text-rose-200 border-rose-700';
+                } else if (item.type === 'inserted') {
+                    boxStyle = 'bg-amber-950/90 border-amber-400 text-amber-200';
+                    aaStyle = 'bg-amber-900/60 text-amber-200 border-amber-700';
+                }
+
+                codonsEl.innerHTML += `
+                    <div class="px-3.5 py-2 rounded-lg border-2 font-mono font-bold text-sm sm:text-base tracking-widest ${boxStyle}">
+                        ${item.bases}
+                    </div>
+                `;
+
+                aminoEl.innerHTML += `
+                    <div class="px-3 py-1.5 rounded-lg border text-xs font-semibold ${aaStyle}">
+                        ${item.aa}
+                    </div>
+                    ${idx < data.codons.length - 1 ? '<span class="text-slate-600 font-bold">→</span>' : ''}
+                `;
+            });
+
+            document.getElementById('sim-explanation').textContent = data.explanation;
+        }
+
+        // --- 3. 12-Fragen-Quiz Daten & Logik ---
+        const quizQuestions = [
+            {
+                id: 1,
+                topic: 'Grundlagen',
+                question: 'Welche drei Eigenschaften treffen laut Definition auf eine Mutation zu?',
+                options: [
+                    'Sie ist geplant, vorübergehend und zielgerichtet.',
+                    'Sie ist spontan, dauerhaft und zufällig (ungerichtet).',
+                    'Sie tritt ausschließlich bei Zellteilungen in Muskelzellen auf.',
+                    'Sie wird immer durch äußere Strahlung erzwungen und ist umkehrbar.'
+                ],
+                correctIndex: 1,
+                explanation: 'Eine Mutation (lat. mutare = verändern) ist definiert als spontane, dauerhafte und zufällige (ungerichtete) Veränderung des Erbguts. Sie geschieht niemals absichtlich.'
+            },
+            {
+                id: 2,
+                topic: 'Mutagene',
+                question: 'Welches Beispiel gehört zu den chemischen Mutagenen?',
+                options: [
+                    'UV-Strahlung und Röntgenstrahlung',
+                    'Viren und infektiöse Partikel',
+                    'Salpetrige Säuren und Teerstoffe (z. B. im Zigarettenrauch)',
+                    'Extrem hohe Temperaturen'
+                ],
+                correctIndex: 2,
+                explanation: 'Salpetrige Säuren und Teerstoffe (z. B. im Zigarettenrauch) sind chemische Substanzen, die das Erbgut verändern können. UV-/Röntgenstrahlung und hohe Temperaturen sind physikalische Mutagene, Viren sind biologische Mutagene.'
+            },
+            {
+                id: 3,
+                topic: 'Mutagene',
+                question: 'Wodurch werden biologische Mutagene ausgelöst?',
+                options: [
+                    'Durch radioaktive Zerfallsprozesse',
+                    'Durch lebende Organismen oder infektiöse Partikel (Viren)',
+                    'Durch salpetrige Säure im Boden',
+                    'Ausschließlich durch Fehler der DNA-Polymerase ohne äußeren Einfluss'
+                ],
+                correctIndex: 1,
+                explanation: 'Biologische Mutagene sind von außen wirkende biologische Faktoren wie lebende Organismen oder infektiöse Partikel (z. B. Viren, die ihr Erbgut in die Wirtszelle einbauen).'
+            },
+            {
+                id: 4,
+                topic: 'Duplikation',
+                question: 'Wie entsteht eine Duplikation häufig während der Meiose?',
+                options: [
+                    'Durch ein ungleiches Crossing-Over bei falscher Anlagerung homologer Chromosomen',
+                    'Durch das vollständige Verschmelzen zweier Zellkerne',
+                    'Durch das Ablesen der mRNA in 4er-Schritten am Ribosom',
+                    'Durch den Verlust von Spindelfasern in der Mitose'
+                ],
+                correctIndex: 0,
+                explanation: 'Während der Meiose kann bei der Paarung homologer Chromosomen eine falsche Anlagerung zu einem ungleichen Crossing-Over führen: Ein Chromosom erhält einen Abschnitt doppelt, dem anderen fehlt er.'
+            },
+            {
+                id: 5,
+                topic: 'Duplikation & Evolution',
+                question: 'Was beschreibt der Begriff „Neofunktionalisierung“ nach einer Genduplikation?',
+                options: [
+                    'Beide Genkopien verlieren sofort ihre Aktivität und sterben ab.',
+                    'Eine Genkopie hat keine lebenswichtige Grundaufgabe mehr und kann durch Mutationen neue Funktionen entwickeln.',
+                    'Ein mikroskopisch sichtbarer Chromosomenabschnitt wird gelöscht.',
+                    'Beide Kopien teilen sich exakt die alte Aufgabe auf, ohne Neues zu entwickeln.'
+                ],
+                correctIndex: 1,
+                explanation: 'Bei der Neofunktionalisierung übernimmt eine Kopie weiterhin die ursprüngliche Aufgabe, während die zweite Kopie frei für neue Mutationen ist und neue Funktionen entwickeln kann (z. B. L-Zapfen für trichromatisches Farbsehen beim Menschen).'
+            },
+            {
+                id: 6,
+                topic: 'Duplikation & Folgen',
+                question: 'Warum führen zusätzliche Genkopien bei der Nonfunktionalisierung häufig zu Entwicklungsstörungen oder genetischen Erkrankungen?',
+                options: [
+                    'Weil dadurch das Startcodon AUG aus der mRNA entfernt wird.',
+                    'Weil die höhere Proteinproduktion zu einem Ungleichgewicht in der Gendosis führt.',
+                    'Weil chemische Mutagene das Chromosom auflösen.',
+                    'Weil die Translation dadurch doppelt so schnell abläuft.'
+                ],
+                correctIndex: 1,
+                explanation: 'Zusätzliche Genkopien bewirken oft eine erhöhte Produktion der entsprechenden Proteine. Dieses Ungleichgewicht in der Gendosis stört fein abgestimmte Zellprozesse und führt häufig zu Entwicklungsstörungen oder Krankheiten.'
+            },
+            {
+                id: 7,
+                topic: 'Konsequenzen',
+                question: 'Welches Beispiel steht in den Notizen für eine vorteilhafte Konsequenz einer Mutation für den Organismus?',
+                options: [
+                    'Albinismus',
+                    'Ungleichgewicht der Gendosis',
+                    'Laktosetoleranz',
+                    'Vorzeitiger Abbruch der Genproduktherstellung'
+                ],
+                correctIndex: 2,
+                explanation: 'Laktosetoleranz ist ein klassisches Beispiel für eine vorteilhafte Mutation, da sie dem Organismus einen Überlebens- bzw. Ernährungsvorteil verschafft. Albinismus hingegen ist ein Beispiel für eine schädliche Konsequenz.'
+            },
+            {
+                id: 8,
+                topic: 'Leseraster',
+                question: 'Wie wird das Leseraster bei der Translation der mRNA am Ribosom festgelegt und abgelesen?',
+                options: [
+                    'Durch das Stoppcodon UAA, danach wird in 2er-Schritten mit Überlappung gelesen.',
+                    'Durch das Startcodon AUG, danach wird lückenlos und ohne Überlappung in 3er-Schritten (Tripletts) gelesen.',
+                    'Zufällig in der Mitte der mRNA in 4er-Schritten (entsprechend den 4 Basen A, U, G, C).',
+                    'Es gibt kein festes Raster; das Ribosom sucht sich passende Aminosäuren selbst aus.'
+                ],
+                correctIndex: 1,
+                explanation: 'Da 4 RNA-Basen (A, U, G, C) für 20 Aminosäuren codieren müssen, bildet immer ein Triplett (3 Basen = Codon) eine Einheit. Das Startcodon AUG legt das Raster fest, das anschließend lückenlos und überlappungsfrei in 3er-Schritten abgelesen wird.'
+            },
+            {
+                id: 9,
+                topic: 'Rastermutationen',
+                question: 'Wann spricht man von einer „out-of-frame-Mutation“ und was ist ihre typische Folge?',
+                options: [
+                    'Wenn 3 oder 6 Basen eingefügt werden; das Protein bleibt fast unverändert.',
+                    'Wenn die Anzahl eingefügter oder entfernter Basen nicht durch 3 teilbar ist (z. B. 1 oder 2 Basen); das gesamte Leseraster verschiebt sich und führt oft zu einem vorzeitigen Stoppcodon.',
+                    'Wenn ein Chromosomenabschnitt um 180° gedreht wird; die Basenzahl bleibt gleich.',
+                    'Wenn zwei nicht-homologe Chromosomen Abschnitte austauschen.'
+                ],
+                correctIndex: 1,
+                explanation: 'Ist die Anzahl der eingefügten (Insertion) oder gelöschten (Deletion) Basen nicht durch 3 teilbar (z. B. 1 oder 2 Basen), verschiebt sich ab dieser Stelle das gesamte Leseraster. Es entstehen falsche Tripletts und oft ein vorzeitiges Stoppcodon (funktionsloses, verkürztes Protein).'
+            },
+            {
+                id: 10,
+                topic: 'Rastermutationen',
+                question: 'Warum sind die Auswirkungen einer „in-frame-Mutation“ (z. B. Deletion von 3 Basen) meist deutlich milder als bei einer out-of-frame-Mutation?',
+                options: [
+                    'Weil 3 Basen einem ganzen Triplett entsprechen und das Leseraster vor und nach der Mutation erhalten bleibt.',
+                    'Weil das Ribosom fehlende Basen automatisch durch Uracil ersetzt.',
+                    'Weil in-frame-Mutationen nur in nicht-codierenden Bereichen stattfinden.',
+                    'Weil dadurch immer eine Neofunktionalisierung ausgelöst wird.'
+                ],
+                correctIndex: 0,
+                explanation: 'Da die Anzahl der veränderten Basen durch 3 teilbar ist (z. B. 3 oder 6 Basen = ganze Codons), verschiebt sich der Leserahmen danach nicht. Dem Protein fehlt lediglich eine Aminosäure (oder eine kommt hinzu), der Rest der Kette bleibt intakt.'
+            },
+            {
+                id: 11,
+                topic: 'Chromosomenmutationen',
+                question: 'Was passiert bei einer „Inversion“ innerhalb eines Chromosoms?',
+                options: [
+                    'Ein Chromosomenabschnitt geht komplett verloren.',
+                    'Ein Abschnitt bricht heraus, dreht sich um 180° und wird umgekehrt wieder eingebaut.',
+                    'Ein Abschnitt aus Chromosom 4 wird in Chromosom 20 eingebaut.',
+                    'Ein Gen wird dreimal hintereinander kopiert.'
+                ],
+                correctIndex: 1,
+                explanation: 'Bei der Inversion (lat. inversio = Umkehrung) wird ein herausgebrochener Abschnitt eines Chromosoms in umgekehrter Orientierung (180° gedreht) wieder an derselben Stelle eingefügt.'
+            },
+            {
+                id: 12,
+                topic: 'Chromosomenmutationen',
+                question: 'Worin besteht der Unterschied zwischen einer chromosomalen Insertion und einer Translokation (z. B. zwischen Chromosom 4 und Chromosom 20)?',
+                options: [
+                    'Bei der Insertion wird ein Abschnitt von einem Chromosom in ein anderes eingebaut; bei der Translokation tauschen beide nicht-homologen Chromosomen gegenseitig Abschnitte aus.',
+                    'Bei der Translokation geht DNA verloren, bei der Insertion wird DNA verdoppelt.',
+                    'Die Insertion betrifft nur RNA, die Translokation nur Proteine.',
+                    'Es gibt keinen Unterschied; beide Begriffe bedeuten exakt dasselbe.'
+                ],
+                correctIndex: 0,
+                explanation: 'Beide betreffen nicht-homologe Chromosomen (wie Chr. 4 und Chr. 20): Bei der Insertion wandert ein Abschnitt einseitig von einem Chromosom in das andere. Bei der Translokation findet ein gegenseitiger Austausch von Abschnitten zwischen beiden Chromosomen statt.'
+            }
+        ];
+
+        // Speicher für gewählte Antworten: { questionIndex: selectedOptionIndex }
+        let userAnswers = {};
+
+        function renderQuiz() {
+            const container = document.getElementById('quiz-questions-container');
+            container.innerHTML = '';
+
+            quizQuestions.forEach((q, qIdx) => {
+                const questionCard = document.createElement('div');
+                questionCard.id = `question-card-${qIdx}`;
+                questionCard.className = 'p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200 transition-all';
+
+                let optionsHtml = '';
+                q.options.forEach((optText, optIdx) => {
+                    const letters = ['A', 'B', 'C', 'D'];
+                    optionsHtml += `
+                        <label id="label-${qIdx}-${optIdx}" class="flex items-start gap-3.5 p-3.5 rounded-xl bg-white border border-slate-200 hover:border-bio-400 hover:bg-bio-50/30 cursor-pointer transition-all select-none">
+                            <input type="radio" name="q-${qIdx}" value="${optIdx}" onchange="selectOption(${qIdx}, ${optIdx})" class="mt-1 w-4 h-4 text-bio-600 focus:ring-bio-500 border-slate-300 cursor-pointer">
+                            <span class="w-6 h-6 rounded-md bg-slate-100 text-slate-700 font-mono text-xs font-bold flex items-center justify-center shrink-0 mt-0.5">${letters[optIdx]}</span>
+                            <span class="text-sm sm:text-base text-slate-800 leading-snug">${optText}</span>
+                        </label>
+                    `;
+                });
+
+                questionCard.innerHTML = `
+                    <div class="flex items-center justify-between gap-2 mb-3">
+                        <span class="text-xs font-bold uppercase tracking-wider text-bio-700 bg-bio-100 px-2.5 py-1 rounded-md">
+                            Frage ${q.id} von ${quizQuestions.length} • ${q.topic}
+                        </span>
+                    </div>
+                    <h3 class="text-base sm:text-lg font-bold text-slate-900 mb-4">${q.question}</h3>
+                    <div class="space-y-2.5">
+                        ${optionsHtml}
+                    </div>
+                `;
+
+                container.appendChild(questionCard);
+            });
+        }
+
+        function selectOption(qIdx, optIdx) {
+            userAnswers[qIdx] = optIdx;
+            const answeredCount = Object.keys(userAnswers).length;
+            const total = quizQuestions.length;
+
+            document.getElementById('quiz-progress-text').textContent = `${answeredCount} / ${total}`;
+            document.getElementById('quiz-progress-bar').style.width = `${(answeredCount / total) * 100}%`;
+
+            // Highlight selected option visually
+            for (let i = 0; i < 4; i++) {
+                const lbl = document.getElementById(`label-${qIdx}-${i}`);
+                if (lbl) {
+                    if (i === optIdx) {
+                        lbl.classList.add('border-bio-600', 'bg-bio-50/70', 'ring-1', 'ring-bio-500');
+                    } else {
+                        lbl.classList.remove('border-bio-600', 'bg-bio-50/70', 'ring-1', 'ring-bio-500');
+                    }
+                }
+            }
+
+            // Hide warning if all answered
+            if (answeredCount === total) {
+                document.getElementById('quiz-warning').classList.add('hidden');
+            }
+        }
+
+        function evaluateQuiz() {
+            const answeredCount = Object.keys(userAnswers).length;
+            const total = quizQuestions.length;
+
+            if (answeredCount < total) {
+                const missing = total - answeredCount;
+                const warningEl = document.getElementById('quiz-warning');
+                document.getElementById('quiz-warning-text').textContent =
+                    `Du hast bisher ${answeredCount} von ${total} Fragen beantwortet. Bitte beantworte noch ${missing} fehlende Frage(n), um die Auswertung zu starten.`;
+                warningEl.classList.remove('hidden');
+                warningEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                return;
+            }
+
+            document.getElementById('quiz-warning').classList.add('hidden');
+
+            let score = 0;
+            const wrongItems = [];
+            const rightItems = [];
+
+            quizQuestions.forEach((q, idx) => {
+                const chosen = userAnswers[idx];
+                const isCorrect = chosen === q.correctIndex;
+                if (isCorrect) {
+                    score++;
+                    rightItems.push({ q, chosen });
+                } else {
+                    wrongItems.push({ q, chosen });
+                }
+            });
+
+            const percent = Math.round((score / total) * 100);
+            let feedbackTitle = '';
+            let feedbackText = '';
+            let cardColors = '';
+
+            if (percent >= 90) {
+                feedbackTitle = 'Hervorragend! Absolutes Klausur-Niveau!';
+                feedbackText = 'Du beherrschst alle Begriffe, Mechanismen und Beispiele aus den Unterrichtsnotizen sicher.';
+                cardColors = 'bg-emerald-50 border-emerald-400 text-emerald-950';
+            } else if (percent >= 70) {
+                feedbackTitle = 'Gut gemacht! Solides Grundwissen.';
+                feedbackText = 'Die meisten Konzepte sitzen schon sehr gut. Schau dir unten die Erklärungen zu deinen falsch beantworteten Fragen an, um letzte Lücken zu schließen.';
+                cardColors = 'bg-bio-50 border-bio-400 text-slate-900';
+            } else if (percent >= 50) {
+                feedbackTitle = 'Guter Anfang – noch etwas Übungsbedarf.';
+                feedbackText = 'Lies dir die Erklärungen zu den Fehlern unten aufmerksam durch und wiederhole die entsprechenden Kapitel oben.';
+                cardColors = 'bg-amber-50 border-amber-400 text-amber-950';
+            } else {
+                feedbackTitle = 'Noch unsicher – ideal zum gezielten Wiederholen!';
+                feedbackText = 'Nutze die detaillierten Fehlererklärungen unten und arbeite danach die Lernmodule und den Leseraster-Simulator noch einmal durch.';
+                cardColors = 'bg-rose-50 border-rose-400 text-rose-950';
+            }
+
+            // Score-Karte befüllen
+            const scoreCard = document.getElementById('quiz-score-card');
+            scoreCard.className = `rounded-2xl p-6 sm:p-8 border-2 ${cardColors}`;
+            scoreCard.innerHTML = `
+                <div class="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                    <div>
+                        <span class="text-xs font-bold uppercase tracking-wider opacity-75">Dein Gesamtergebnis</span>
+                        <h3 class="text-2xl sm:text-3xl font-extrabold mt-1">${feedbackTitle}</h3>
+                        <p class="mt-2 text-sm sm:text-base opacity-90 max-w-2xl">${feedbackText}</p>
+                    </div>
+                    <div class="flex items-center gap-4 bg-white/80 backdrop-blur-sm px-6 py-4 rounded-2xl border border-black/10 shrink-0">
+                        <div class="text-center">
+                            <div class="text-3xl sm:text-4xl font-extrabold font-mono text-slate-900">${score}/${total}</div>
+                            <div class="text-xs font-semibold text-slate-500 uppercase">Punkte</div>
+                        </div>
+                        <div class="h-10 w-px bg-slate-300"></div>
+                        <div class="text-center">
+                            <div class="text-3xl sm:text-4xl font-extrabold font-mono text-bio-700">${percent}%</div>
+                            <div class="text-xs font-semibold text-slate-500 uppercase">Richtig</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Detaillierte Auswertung (zuerst alle falschen Fragen ausführlich erklären!)
+            const reviewContainer = document.getElementById('quiz-detailed-review');
+            reviewContainer.innerHTML = '';
+
+            if (wrongItems.length > 0) {
+                reviewContainer.innerHTML += `
+                    <div class="pt-2">
+                        <h4 class="text-xl font-bold text-rose-800 flex items-center gap-2">
+                            <span class="w-7 h-7 rounded-lg bg-rose-100 text-rose-700 flex items-center justify-center text-sm font-extrabold">!</span>
+                            Auswertung deiner falschen Antworten (${wrongItems.length})
+                        </h4>
+                        <p class="text-sm text-slate-600 mt-1">Hier siehst du genau, welche Antwort falsch war, was richtig gewesen wäre und warum:</p>
+                    </div>
+                `;
+
+                wrongItems.forEach(({ q, chosen }) => {
+                    reviewContainer.innerHTML += `
+                        <div class="rounded-2xl p-5 sm:p-6 bg-rose-50/70 border-2 border-rose-200 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <span class="text-xs font-bold uppercase tracking-wider text-rose-700 bg-rose-100 px-2.5 py-1 rounded-md">
+                                    Frage ${q.id} • ${q.topic} • Falsch beantwortet
+                                </span>
+                            </div>
+                            <h5 class="font-bold text-slate-900 text-base sm:text-lg">${q.question}</h5>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+                                <div class="p-3.5 rounded-xl bg-white border border-rose-300">
+                                    <div class="text-xs font-bold uppercase text-rose-600 mb-1">✕ Deine gewählte Antwort:</div>
+                                    <div class="text-slate-800 font-medium">${q.options[chosen]}</div>
+                                </div>
+                                <div class="p-3.5 rounded-xl bg-emerald-50 border border-emerald-300">
+                                    <div class="text-xs font-bold uppercase text-emerald-700 mb-1">✓ Richtige Antwort:</div>
+                                    <div class="text-emerald-950 font-semibold">${q.options[q.correctIndex]}</div>
+                                </div>
+                            </div>
+
+                            <div class="p-4 rounded-xl bg-white/90 border border-slate-200 text-sm text-slate-700 leading-relaxed">
+                                <strong class="text-slate-900">Erklärung:</strong> ${q.explanation}
+                            </div>
+                        </div>
+                    `;
+                });
+            } else {
+                reviewContainer.innerHTML += `
+                    <div class="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-center font-semibold">
+                        🎉 Perfekt! Du hast keine einzige Frage falsch beantwortet!
+                    </div>
+                `;
+            }
+
+            if (rightItems.length > 0) {
+                reviewContainer.innerHTML += `
+                    <div class="pt-4">
+                        <h4 class="text-lg font-bold text-emerald-800 flex items-center gap-2">
+                            <span class="w-6 h-6 rounded-lg bg-emerald-100 text-emerald-700 flex items-center justify-center text-xs font-extrabold">✓</span>
+                            Richtig beantwortete Fragen (${rightItems.length})
+                        </h4>
+                    </div>
+                `;
+
+                rightItems.forEach(({ q, chosen }) => {
+                    reviewContainer.innerHTML += `
+                        <div class="rounded-xl p-4 bg-emerald-50/40 border border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2 text-sm">
+                            <div>
+                                <span class="font-bold text-emerald-800">Frage ${q.id}:</span>
+                                <span class="text-slate-800 font-medium">${q.question}</span>
+                            </div>
+                            <span class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-lg shrink-0 self-start sm:self-center">
+                                ✓ ${q.options[chosen]}
+                            </span>
+                        </div>
+                    `;
+                });
+            }
+
+            // Auswertung einblenden & Fragen-Container ausblenden für maximale Übersicht
+            document.getElementById('quiz-questions-container').classList.add('hidden');
+            document.getElementById('quiz-submit-area').classList.add('hidden');
+            const resultsEl = document.getElementById('quiz-results-container');
+            resultsEl.classList.remove('hidden');
+            resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function resetQuiz() {
+            userAnswers = {};
+            document.getElementById('quiz-progress-text').textContent = `0 / ${quizQuestions.length}`;
+            document.getElementById('quiz-progress-bar').style.width = '0%';
+            document.getElementById('quiz-results-container').classList.add('hidden');
+            document.getElementById('quiz-questions-container').classList.remove('hidden');
+            document.getElementById('quiz-submit-area').classList.remove('hidden');
+            renderQuiz();
+            document.getElementById('quiz-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // Initialisierung beim Laden
+        window.addEventListener('DOMContentLoaded', () => {
+            setSimulation('wildtype');
+            renderQuiz();
+        });
+    </script>
+</body>
+</html>
